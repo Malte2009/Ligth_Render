@@ -1,0 +1,8 @@
+[settings]
+
+
+[defined]
+nothing = 0
+lightSource = 1
+tempLightSource = 2
+Wall = 3
