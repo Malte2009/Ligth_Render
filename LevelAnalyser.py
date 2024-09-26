@@ -1,12 +1,13 @@
 
 from config import config
 from LevelGenerator import level
+from fileUtil import readLevel
 
 
 class LevelAnalyser:
     def __init__(self):
-        self.level = level.get()
-    
+        self.level = readLevel()
+
     def getWallCount(self):
         count = 0
 

@@ -5,20 +5,15 @@ from config import config
 import time
 
 class LevelGenerator:
+    def __init__(self):
+        self.level = []
 
     def generate(self, width, height):
         startTime = time.time()
-        file = open("level.json", "a")
-        file.write("[\n")
 
         for i in range(height):
-            if i == height - 1:
-                file.write(f"{[config.getDefined().get("nothing")] * width}")
-            else:
-                file.write(f"{[config.getDefined().get("nothing")] * width},\n")
-
-        file.write("\n]")
-        file.close()
+            self.level.append([0] * width)
+        
         endTime = time.time()
         
         print(f"Level generated in {round(endTime - startTime, 2)} seconds")
@@ -28,6 +23,8 @@ class LevelGenerator:
     
     def getTile(self, x, y):
         return self.level[y][x]
-
+    
+    def get(self):
+        return self.level
 
 level = LevelGenerator()

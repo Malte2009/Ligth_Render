@@ -31,7 +31,6 @@ def main():
             sys.exit()
 
         height = int(input("Enter the height of the level: "))
-        
 
         if height > config.getSettings()["maxSize"]:
             print(f"Height cannot be greater than {config.getSettings()['maxSize']}")
@@ -45,10 +44,6 @@ def main():
         print("Level generated and saved to level.json")
         print("You can edit the level.json file to change the level")
         input("Press enter to continue...")
-    
-    
-
-    print("Level generation complete")
 
     print("Starting rendering...")
     
