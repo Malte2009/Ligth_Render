@@ -1,8 +1,9 @@
 import sys
 import os
 
+from LevelAnalyser import LevelAnalyser
 from LevelGenerator import level
-from fileUtil import createFile, writeLevel
+from fileUtil import createFile, writeLevel, readLevel
 from config import config
 from RenderEngine import Engine
 
@@ -50,7 +51,13 @@ def main():
 
     engine = Engine()
 
-    engine.startRender()
+    if engine.startRender() is False:
+        print("Rendering failed")
+        input("Press enter to exit...")
+        sys.exit()
+
+    engine.render()
+
 
 if __name__ == '__main__':
     main()

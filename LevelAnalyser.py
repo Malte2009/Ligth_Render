@@ -1,90 +1,87 @@
 
 from config import config
-from LevelGenerator import level
 from fileUtil import readLevel
 
 
 class LevelAnalyser:
-    def __init__(self):
-        self.level = readLevel()
 
-    def getWallCount(self):
+    def getWallCount(self, level):
         count = 0
 
-        for y in self.level:
+        for y in level:
             for x in y:
                 if x == config.get().get("defined").get("wall"):
                     count += 1
 
         return count
 
-    def getWallPositions(self):
+    def getWallPositions(self, level):
         positions = []
 
-        for y in range(len(self.level)):
-            for x in range(len(self.level[y])):
-                if self.level[y][x] == config.get().get("defined").get("wall"):
+        for y in range(len(level)):
+            for x in range(len(level[y])):
+                if level[y][x] == config.get().get("defined").get("wall"):
                     positions.append((x, y))
 
         return positions
 
-    def getEmptyCount(self):
+    def getEmptyCount(self, level):
         count = 0
 
-        for y in self.level:
+        for y in level:
             for x in y:
                 if x == config.get().get("defined").get("nothing"):
                     count += 1
 
         return count
 
-    def getEmptyPositions(self):
+    def getEmptyPositions(self, level):
         positions = []
 
-        for y in range(len(self.level)):
-            for x in range(len(self.level[y])):
-                if self.level[y][x] == config.get().get("defined").get("nothing"):
+        for y in range(len(level)):
+            for x in range(len(level[y])):
+                if level[y][x] == config.get().get("defined").get("nothing"):
                     positions.append((x, y))
 
         return positions
 
-    def getLightCount(self):
+    def getLightSourceCount(self, level):
         count = 0
 
-        for y in self.level:
+        for y in level:
             for x in y:
-                if x == config.get().get("defined").get("light"):
+                if x == config.get().get("defined").get("lightSource"):
                     count += 1
 
         return count
 
-    def getLightPositions(self):
+    def getLightSourcePositions(self, level):
         positions = []
 
-        for y in range(len(self.level)):
-            for x in range(len(self.level[y])):
-                if self.level[y][x] == config.get().get("defined").get("light"):
-                    positions.append((x, y))
+        for y in range(len(level)):
+            for x in range(len(level[y])):
+                if level[y][x] == config.getDefined().get("lightSource"):
+                    positions.append([x, y])
 
         return positions
 
-    def getTempLightCount(self):
+    def getTempLightSourceCount(self, level):
         count = 0
 
-        for y in self.level:
+        for y in level:
             for x in y:
-                if x == config.get().get("defined").get("tempLight"):
+                if x == config.get().get("defined").get("tempLightSource"):
                     count += 1
 
         return count
 
-    def getTempLightPositions(self):
+    def getTempLightSourcePositions(self, level):
         positions = []
 
-        for y in range(len(self.level)):
-            for x in range(len(self.level[y])):
-                if self.level[y][x] == config.get().get("defined").get("tempLight"):
-                    positions.append((x, y))
+        for y in range(len(level)):
+            for x in range(len(level[y])):
+                if level[y][x] == config.getDefined().get("tempLightSource"):
+                    positions.append([x, y])
 
         return positions
 

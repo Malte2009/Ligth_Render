@@ -1,11 +1,12 @@
 [settings]
 maxSize = 10000
-depth = 100
+depth = 10000
 
 
 [defined]
 nothing = 10
 light = 11
-tempLight = 12
-wall = 13
+lightSource = 12
+tempLightSource = 13
+wall = 14
 
