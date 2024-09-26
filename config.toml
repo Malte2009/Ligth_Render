@@ -1,4 +1,5 @@
 [settings]
+maxSize = 10000
 
 
 [defined]
