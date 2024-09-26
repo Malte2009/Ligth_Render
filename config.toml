@@ -2,7 +2,8 @@
 
 
 [defined]
-nothing = 0
-lightSource = 1
-tempLightSource = 2
-Wall = 3
+nothing = 10
+light = 11
+tempLight = 12
+wall = 13
+
