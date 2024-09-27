@@ -1,10 +1,10 @@
 import sys
+
 import os
 
-from LevelAnalyser import LevelAnalyser
 from LevelGenerator import level
-from fileUtil import createFile, writeLevel, readLevel
 from config import config
+from fileUtil import createFile, writeLevel
 
 sys.setrecursionlimit(10**6)
 
