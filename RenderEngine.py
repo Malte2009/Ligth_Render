@@ -1,3 +1,4 @@
+from itertools import count
 from time import time
 
 from config import config
@@ -19,8 +20,6 @@ class Engine:
 
     def startRender(self):
 
-        level[5][5] = config.getDefined()["lightSource"]
-
         lightSourceCount = levelAnalyser.getLightSourceCount(level)
 
         if lightSourceCount == 0:
@@ -31,29 +30,33 @@ class Engine:
 
         self.renderLight(True)
 
+        self.cleanUp()
+
         self.endTime = time()
 
-        print(f"Rendering completed in {round(self.endTime - self.startTime, 5)} seconds")
+
+        print(f"Rendering completed in {self.endTime - self.startTime} seconds")
 
     def render(self):
         for y in level:
             for x in y:
                 if x == config.getDefined()["nothing"]:
-                    print(" ", end=" ")
+                    print(" ", end="")
                 elif x == config.getDefined()["wall"]:
-                    print("#", end=" ")
+                    print("#", end="")
                 elif x == config.getDefined()["light"]:
-                    print("1", end=" ")
+                    print("1", end="")
                 elif x == config.getDefined()["lightSource"]:
-                    print("L", end=" ")
+                    print("L", end="")
                 elif x == config.getDefined()["tempLightSource"]:
-                    print("T", end=" ")
+                    print("T", end="")
                 else:
-                    print("?", end=" ")
+                    print("?", end="")
 
             print()
 
     def renderLight(self, main: bool):
+        print(f"Rendering depth {self.currentDepth}")
 
         if self.currentDepth >= self.depth:
             return
@@ -87,7 +90,7 @@ class Engine:
                     xDirection = cord[0] - x
                     yDirection = cord[1] - y
 
-                    level[y][x] = config.getDefined()["light"]
+
                     self.renderBeam(x, y, xDirection, yDirection)
 
         tempLightSources = levelAnalyser.getTempLightSourceCount(level)
@@ -106,7 +109,8 @@ class Engine:
                 if x == xPos and y == yPos:
                     continue
 
-
+                if x >= self.levelWidth or y >= self.levelHeight or x < 0 or y < 0:
+                    continue
                 cords.append([x, y])
 
         return cords
@@ -144,3 +148,31 @@ class Engine:
 
             if level[cord[1]][cord[0]] == config.getDefined()["nothing"]:
                 level[cord[1]][cord[0]] = config.getDefined()["light"]
+
+                surroundingTiles = self.getSurroundingTiles(cord[0], cord[1])
+
+                for tile in surroundingTiles:
+                    if level[tile[1]][tile[0]] == config.getDefined()["nothing"]:
+                        self.addPixels(tile[0], tile[1])
+
+    def addPixels(self, xPos, yPos):
+        surroundingTiles = self.getSurroundingTiles(xPos, yPos)
+        count = 0
+        for tile in surroundingTiles:
+            if level[tile[1]][tile[0]] == config.getDefined()["light"]:
+                count += 1
+
+        if count > 3:
+            level[yPos][xPos] = config.getDefined()["light"]
+
+            surroundingTiles = self.getSurroundingTiles(xPos, yPos)
+
+            for tile in surroundingTiles:
+                if level[tile[1]][tile[0]] == config.getDefined()["nothing"]:
+                    self.addPixels(tile[0], tile[1])
+
+    def cleanUp(self):
+        for y in range(self.levelHeight):
+            for x in range(self.levelWidth):
+                if level[y][x] == config.getDefined()["tempLightSource"]:
+                    level[y][x] = config.getDefined()["light"]

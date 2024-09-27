@@ -5,8 +5,6 @@ from LevelAnalyser import LevelAnalyser
 from LevelGenerator import level
 from fileUtil import createFile, writeLevel, readLevel
 from config import config
-from RenderEngine import Engine
-
 
 sys.setrecursionlimit(10**6)
 
@@ -48,6 +46,8 @@ def main():
         input("Press enter to continue...")
 
     print("Starting rendering...")
+
+    from RenderEngine import Engine
 
     engine = Engine()
 

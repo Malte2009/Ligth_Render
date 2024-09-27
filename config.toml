@@ -1,6 +1,6 @@
 [settings]
 maxSize = 10000
-depth = 10000
+depth = 3
 
 
 [defined]
