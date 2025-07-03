@@ -1,15 +1,23 @@
+
 # Light Render
 
-## Description
-This is a simple ray tracer that I wrote in Python. It supports things like the amount of reflections and upscaling.
+## Beschreibung
+Dieses Projekt ist eine einfache Rendering-Engine in Python, die 2D-Level als ASCII-Grafik auf der Konsole darstellt.
+Es enthält Funktionen zum Generieren und Analysieren von Levels sowie ein einfaches Rendering-System.
 
-## Setup
+## Funktionen
+- Zufällige Level-Generierung
+- Analyse von Level-Strukturen (z. B. Erreichbarkeit des Ziels)
+- Textbasiertes Rendering von Levels
+- Konfigurierbare Einstellungen (Levelgröße, Anzahl Hindernisse etc.)
+
+## Installation
 
 ```bash
 pip install -r requirements.txt
-
 python main.py
 ```
 
-
-### Dependencies
+## Abhängigkeiten
+- Python 3.x
+- Keine weiteren externen Bibliotheken notwendig (Standardbibliothek)
